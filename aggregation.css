@@ -1,0 +1,286 @@
+
+/**
+ * 自定义CSS，支持less语法
+ * 注：section-class-name需要修改
+ * 每个模块节点className不能相同，否则会出现样式冲突
+ */
+ body{
+     /*background:#000;*/
+ }
+ .poi_wrapper_marb(@margin-bottom:0rem){
+     margin-bottom:@margin-bottom;
+     margin-top:@margin-bottom;
+ }
+ .poi_img_hw(@height:1.35rem,@width:23%) { 
+     height:@height;
+     width:@width;
+ } 
+ .content_wrapper_w(@width:72%){
+    width:@width;
+ }
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.data_wrapper{
+    width:100%;
+    height:100%;
+}
+
+/*顶部图片*/
+.title{
+    width:100%;
+    height:2.44rem;
+    margin:0;
+}
+.title img{
+    width:100%;
+    height:100%;
+}
+
+/*商户POI*/
+.poi_wrapper{
+    display: -webkit-box; /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+    display: -moz-box; /* 老版本语法: Firefox (buggy) */
+    display: -ms-flexbox; /* 混合版本语法: IE 10 */
+    display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+    display: flex; /* 新版本语法: Opera 12.1, Firefox 22+ */
+    flex-wrap: wrap;
+    background: #fff;
+    padding:.2rem;
+    border-bottom:1px solid #ddd;
+}
+/*可变*/
+.pw_marbot-A{
+   .poi_wrapper_marb; 
+}
+.pw_marbot-B{
+   .poi_wrapper_marb(.2rem); 
+}
+.pw_marbot-C{
+   .poi_wrapper_marb(.1rem); 
+}
+.pw_marbot-D{
+   .poi_wrapper_marb; 
+}
+
+/*商户图片*/
+.poi_img{
+    position:relative;
+}
+/*可变*/
+.pi_wid_hei-A{
+   .poi_img_hw(3.5rem,100%); 
+}
+.pi_wid_hei-B{
+   .poi_img_hw(2.1rem,34%); 
+}
+.pi_wid_hei-C{
+   .poi_img_hw(1.65rem,27%); 
+}
+.pi_wid_hei-D{
+   .poi_img_hw; 
+}
+
+.imgcontent{
+    width:100%;
+    height:100%;
+}
+.imgcontent div{
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+}
+.imgcontent img{
+    width:100%;
+    height:100%;
+}
+/*右侧主体部分*/
+.content_wrapper{
+    margin-left:.2rem;
+}
+/*可变*/
+.cw_wid-A{
+    .content_wrapper_w(100%);
+}
+.cw_wid-B{
+    .content_wrapper_w(62%);
+}
+.cw_wid-C{
+    .content_wrapper_w(68%);
+}
+.cw_wid-D{
+    .content_wrapper_w(72%);
+}
+
+.namecontent,.content1,.content2,.content3{
+    background:#fff;
+}
+
+/*商户名*/
+.namecontent{
+    font-size:.3rem;
+    font-weight: 500;
+    margin-top:.05rem;
+    height:.38rem;
+    line-height: .38rem;
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+}
+/*星级 人均 距离*/
+.content1{
+    position: relative;
+    width:100%;
+    height:.28rem;
+    margin-top:.08rem;
+    color:#777;
+}
+.content1 .star_show{
+    display: inline-block;
+    height:.28rem;
+    position:relative;
+}
+.content1 .star_show img{
+    height:.2rem;
+    position:relative;
+    top:-1px;
+}
+.content1 .price_show{
+    display: inline-block;
+    font-size: .17rem;
+    position:relative;
+    top:-1px;
+}
+.content1 .area_show{
+    display: inline-block;
+    position:absolute;
+    width:50%;
+    text-align: right;
+    top:.03rem;
+    right:0px;
+    font-size: .18rem;
+    line-height: .27rem;
+    white-space:nowrap; 
+    overflow:hidden; 
+    span{
+        display: inline-block;
+        margin:0;
+        padding:0;
+    }
+    .distance{
+        white-space:nowrap; 
+        overflow:hidden; 
+        text-overflow:ellipsis;
+    }
+    .posdescr{
+        width:62%;
+        /*border:1px solid black;*/
+        /*line-height: .27rem;*/
+        white-space:nowrap; 
+        overflow:hidden; 
+        text-overflow:ellipsis;
+    }
+}
+
+/*品类 排名 */
+.content2{
+
+}
+.content2 div{
+    width:100%;
+    padding-top:.17rem;
+    color:#777;
+    font-size: .2rem;
+    
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+}
+.content2 .descr_show{
+
+}
+.content2 .rank_show{
+    margin-left:  .05rem;
+    padding:0 .05rem;
+    background: rgb(251,244,229);
+    color:rgb(192,163,93);
+
+}
+.content2 .check{
+    padding-bottom:0rem; 
+    color:rgb(64,189,165);
+}
+
+
+/*优惠买单 团购*/
+.content3{
+    color:#777;
+    font-size: .2rem;
+}
+
+
+.content3>ul li{
+    position: relative;
+    width:93%;
+    margin-top:.16rem;
+    height:.26rem;
+    display: block;
+    img{
+        vertical-align:	baseline;
+        display: inline-block;
+        height:.26rem;
+        width:.26rem;
+        /*margin-left: 1.53rem;*/
+        margin-right:.05rem;
+    }
+    span{
+        position: absolute;
+        top:.02rem;
+        display: inline-block;
+        width:100%;
+        /*height:100%; */
+        overflow: hidden;
+        line-height: .25rem;
+        /*height:.24rem;*/
+        white-space:nowrap; 
+        overflow:hidden; 
+        text-overflow:ellipsis;
+        
+    }
+}
+
+/*优惠框*/
+.promotion {
+    position: absolute;
+    display: inline-block;
+    width:1.2rem;
+    font-size: 0;
+    margin:0;
+    padding:0;
+}
+.promotion span{
+    margin:0;
+    position: absolute;
+    right:1px;
+    padding: 0 .05rem;
+    height:.2rem;
+    line-height: .2rem;
+    border:.02rem solid orange;
+    font-size: .17rem;
+    color: orange;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,116 @@
+"JSON"
+/**
+ * 本文件为模块的描述部分，制定模块的对外接口和渲染方式
+ * 整个文件为一个JS对象，大括号外部的方法会被舍弃，
+ * model和render必须有，其他方法看情况使用
+ */
+({
+/**
+ * 模块名字，需要修改.
+ * 建议4-10个字。
+ */
+name: "测试-图文广告-美食聚合页",
+
+/**
+ * 模块功能详细描述，需要修改
+ * 建议10-20个字
+ */
+desc: "测试-图文广告-美食聚合页",
+
+/**
+ * 模块的配置接口 (model核心部分)
+ * 在这里定义的字段会生成输入项，例如<input>，用于手动设置或输入
+ * 输入的值可以在render方法(或其他this的方法)中引用。
+ * 引用方法：this.data.height, this.data.content
+ * 详细wiki: http://wiki.sankuai.com/pages/viewpage.action?pageId=337139019
+ *
+ */
+model: {
+    /**
+     * height, content是字段名字，可以自定义
+     * {
+     *     name: '中文名，用于展示',
+     *     type: 'String|select|bool', 类型说明见上方wiki
+     *     def: '' 默认值
+     * }
+     */
+    type: {
+        name: '高度',
+        type: 'select',
+    	options: {
+            "http": "http",
+        },
+        def: 'http'
+    },
+    httpget: {
+        name: "数据源",
+    	type: "hide",
+    // 	mapper: function (inputs) {
+    // 		return Mapper.HTTP_GET({
+    // 		  //  url:'http://feedapi.ads.vip.sankuai.com/api/poilist?offset=0&limit=20&tid=21&uid=1344387&uuid=0A9B17CB9CAF3AC0C2620AE3ED78FF7D0DB2E56FFFF3BE2850ADCF1612C80E7A&lat=39.993539&lng=116.338673&cityid=1&medium=iphone&term=8.2&channel=push'
+    //             url:'http://10.32.157.248:8410/api/poilist?offset=FIREWORK_REF(GLOBAL;$.queryParam.offset;~;0)&limit=20&tid=FIREWORK_REF(GLOBAL;$.queryParam.tid;~;)&uid=FIREWORK_REF(GLOBAL;$.queryParam.userid;~;)&uuid=FIREWORK_REF(GLOBAL;$.queryParam.uuid;~;)&lat=FIREWORK_REF(GLOBAL;$.queryParam.lat;~;)&lng=FIREWORK_REF(GLOBAL;$.queryParam.lng;~;)&cityid=FIREWORK_REF(GLOBAL;$.queryParam.ci;~;)&medium=FIREWORK_REF(GLOBAL;$.queryParam.utm_medium;~;)&term=FIREWORK_REF(GLOBAL;$.queryParam.utm_term;~;)&channel=FIREWORK_REF(GLOBAL;$.queryParam.channel;~;push)&feedid=FIREWORK_REF(GLOBAL;$.queryParam.feedid;~;)&aeraid=FIREWORK_REF(GLOBAL;$.queryParam.aeraid;~;)&cateid=FIREWORK_REF(GLOBAL;$.queryParam.cateid;~;)&query=FIREWORK_REF(GLOBAL;$.queryParam.query;~;)&distance=FIREWORK_REF(GLOBAL;$.queryParam.distance;~;)&srccityid=FIREWORK_REF(GLOBAL;$.queryParam.srccityid;~;)&orderby=FIREWORK_REF(GLOBAL;$.queryParam.orderby;~;)&hasGroup=FIREWORK_REF(GLOBAL;$.queryParam.hasGroup;~;)&bussinessid=FIREWORK_REF(GLOBAL;$.queryParam.bussinessid;~;)&controlResults=FIREWORK_REF(GLOBAL;$.queryParam.controlResults;~;)'
+    // 		});
+    // 	},
+//10.32.114.238:8410/getAds/poilist?offset=0&limit=30&distance=0.0&uuid=E52BBD9E71B1AD53117BE05A73ADDBDB3381D147E7BF4FEC8BBD65448D28B574&cateid=1&channel=TUWEN_SIEVE&feedid=2807320603839254728&ad_lat=26.558334&ad_lng=106.70192&ad_cityid=1&uid=184612674
+    	mapper: function (inputs) {
+    		return Mapper.HTTP_GET({
+    			url: "http://feedapi.ads.vip.sankuai.com/getAds/poilist",
+     			params: {
+    			    offset: ['#URL','$.queryParam.offset','0'],
+    			    limit:['15'],
+    			    uid:['$.queryParam.userid','184612674'],
+    			    uuid:['$.queryParam.uuid','E52BBD9E71B1AD53117BE05A73ADDBDB3381D147E7BF4FEC8BBD65448D28B574'],
+    			    channel:['$.queryParam.channel','TUWEN_SIEVE'],
+    			    ad_lat:['$.queryParam.ad_lat','26.558334'],
+    			    ad_lng:['$.queryParam.ad_lng','106.70192'],
+    			    ad_cityid:['$.queryParam.ad_cityid','1'], 
+    			    areaid:['$.queryParam.areaid',],
+    			    cateid:['$.queryParam.cateid','1'],
+    			    distance:['$.queryParam.distance','0.0'],
+    			    medium:['$.queryParam.utm_medium','iphone'],
+     			    term:['$.queryParam.utm_term',],
+     			    feedid:['$.queryParam.feedid','2807320603839254728']
+    			},
+    		});
+    	},
+    },
+    content: {
+        name: '内容',
+        type: 'string',
+        def: '我是内容默认值'
+    },
+    start_img1:{
+        name:'满星',
+        type:'string',
+        subtype:'image',
+        def:'http://p0.meituan.net/codeman/bc9eeea41f3e93e19f7f9519a589e92c2694.jpg'
+    },
+    start_img2:{
+        name:'无星',
+        type:'string',
+        subtype:'image',
+        def:'http://p0.meituan.net/codeman/4a899142be1a1bb108e3131b78fa64312817.jpg'
+    },
+    start_img3:{
+        name:'半星',
+        type:'string',
+        subtype:'image',
+        def:'http://p1.meituan.net/codeman/3b9348ea80cd60f8a299cb6d307a9ae92671.jpg'
+    }
+},
+
+
+
+/**
+ * 渲染，核心方法。返回的节点最终生成在页面中
+ * 注：不要删除此方法，且必须return一个zepto节点
+ */
+render: function () {
+
+    return $(`
+        <div class="ad-all">
+        
+        </div>
+    `);
+}
+});
